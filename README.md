@@ -77,11 +77,11 @@ API endpoints (selected):
 
 ## Screenshots
 
-Home, Upload and Results screenshots are included under `screenshots/` (placeholders).
+Home and Results screenshots are included under `screenshots/` (captured from the running app).
 
-![Home](screenshots/home.svg)
+![Home](screenshots/home.png)
 ![Upload](screenshots/upload.svg)
-![Results](screenshots/results.svg)
+![Results](screenshots/results.png)
 
 ---
 
