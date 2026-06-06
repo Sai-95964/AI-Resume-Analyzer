@@ -24,8 +24,17 @@
         <main class="results-container" id="resultsContainer">
             <div class="loading"><p>Loading results...</p></div>
         </main>
+        <div class="results-actions" style="padding:20px; text-align:right;">
+            <button id="downloadReportBtn" class="btn-analyze">Download Analysis Report</button>
+        </div>
+        <div class="dashboard" style="padding:20px;">
+            <h3>ATS Breakdown</h3>
+            <canvas id="atsChart" width="400" height="200"></canvas>
+            <h3>Skill Distribution</h3>
+            <canvas id="skillsChart" width="400" height="200"></canvas>
+        </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/results.js') }}"></script>
 </body>
 </html>

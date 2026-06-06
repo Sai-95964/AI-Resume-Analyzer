@@ -12,6 +12,7 @@ from utils.paths import PROJECT_ROOT, project_path
 import os
 from datetime import datetime
 from dotenv import load_dotenv
+from utils.report import generate_report_pdf
 
 load_dotenv(project_path('.env'))
 
@@ -273,6 +274,22 @@ def llm_rewrite():
         if not result.get('enabled'):
             return jsonify(result), 503
         return jsonify(result), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/report', methods=['POST'])
+def generate_report():
+    """Generate a PDF report from POSTed analysis JSON."""
+    try:
+        data = request.get_json(silent=True) or {}
+        if not data:
+            return jsonify({'error': 'Missing analysis data'}), 400
+        pdf_bytes = generate_report_pdf(data)
+        return (pdf_bytes, 200, {
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename="resume_analysis.pdf"'
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

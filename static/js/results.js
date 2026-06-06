@@ -231,6 +231,35 @@ function renderResults(results, container) {
     container.innerHTML = html;
 }
 
+function renderCharts(results) {
+    try {
+        const ats = results.ats_details || {};
+        const atsLabels = Object.keys(ats);
+        const atsData = atsLabels.map(k => Number(ats[k]));
+        const atsCtx = document.getElementById('atsChart');
+        if (atsCtx && atsLabels.length) {
+            new Chart(atsCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: atsLabels, datasets: [{ data: atsData, backgroundColor: ['#667eea','#764ba2','#ffc107','#28a745','#dc3545'] }] },
+            });
+        }
+
+        const skills = (results.resume_skill_categories || {});
+        const skillLabels = Object.keys(skills);
+        const skillData = skillLabels.map(k => skills[k].length || 0);
+        const skillsCtx = document.getElementById('skillsChart');
+        if (skillsCtx && skillLabels.length) {
+            new Chart(skillsCtx.getContext('2d'), {
+                type: 'bar',
+                data: { labels: skillLabels, datasets: [{ label: 'Skill count', data: skillData, backgroundColor: '#667eea' }] },
+                options: { responsive: true }
+            });
+        }
+    } catch (e) {
+        // ignore chart errors
+    }
+}
+
 function exportResultsJson() {
     const raw = sessionStorage.getItem('analysisResults');
     if (!raw) {
@@ -259,7 +288,40 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     try {
-        renderResults(JSON.parse(resultsJson), container);
+        const parsed = JSON.parse(resultsJson);
+        renderResults(parsed, container);
+        // render charts
+        renderCharts(parsed);
+        // wire download button
+        const downloadBtn = document.getElementById('downloadReportBtn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', async function() {
+                try {
+                    downloadBtn.disabled = true;
+                    downloadBtn.textContent = 'Preparing...';
+                    const res = await fetch('/api/report', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(parsed),
+                    });
+                    if (!res.ok) throw new Error('Failed to generate PDF');
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'resume_analysis.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    alert('Could not generate PDF: ' + err.message);
+                } finally {
+                    downloadBtn.disabled = false;
+                    downloadBtn.textContent = 'Download Analysis Report';
+                }
+            });
+        }
     } catch (error) {
         container.innerHTML = '<div class="error-message"><p>Error loading results: ' + escapeHtml(error.message) + '</p></div>';
     }
