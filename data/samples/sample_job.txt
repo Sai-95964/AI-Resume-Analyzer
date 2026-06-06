@@ -1,0 +1,20 @@
+AI Engineer / Machine Learning Engineer
+
+We are hiring an AI Engineer to build production ML systems and LLM-powered features.
+
+Required:
+- 3+ years Python experience
+- Flask or FastAPI
+- SQL and data pipelines
+- TensorFlow or PyTorch
+- AWS cloud services
+- Docker and containerization
+- Strong communication and teamwork
+
+Nice to have:
+- Kubernetes
+- React
+- NLP and LLM integration experience
+- Bachelor's degree in Computer Science or related field
+
+You will design APIs, deploy models, and improve our resume-matching platform.

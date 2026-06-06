@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="loadingOverlay" class="loading-overlay" hidden>
+        <div class="loading-box">
+            <p id="loadingMessage">Analyzing...</p>
+            <small>This may take 15–30 seconds with AI enabled.</small>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>AI Resume Analyzer</h1>
+            <p>ATS scoring + optional LLM-powered feedback</p>
+        </header>
+        
+        <main>
+            <form id="analysisForm" method="POST" enctype="multipart/form-data">
+                <div class="form-actions-row">
+                    <button type="button" class="btn-secondary" id="loadSampleBtn">Load demo data</button>
+                </div>
+
+                <div class="form-section">
+                    <label for="resume">Upload Resume:</label>
+                    <input type="file" id="resume" name="resume" accept=".pdf,.docx,.txt" required>
+                    <small>Supported formats: PDF, DOCX, TXT</small>
+                </div>
+                
+                <div class="form-section">
+                    <label for="jobDescription">Job Description:</label>
+                    <textarea id="jobDescription" name="job_description" placeholder="Paste the job description here..." rows="8" required></textarea>
+                </div>
+
+                {% if llm_available %}
+                <div class="form-section form-checkbox">
+                    <label>
+                        <input type="checkbox" id="useLlm" name="use_llm" value="true" checked>
+                        Include AI analysis (resume review, rewrites, interview questions)
+                    </label>
+                </div>
+                {% endif %}
+                
+                <button type="submit" class="btn-analyze">Analyze Resume</button>
+                <p class="form-hint" id="llmHint">
+                    Parser → Skills → TF-IDF ATS → optional Gemini/OpenAI layer (set <code>GOOGLE_API_KEY</code> in <code>.env</code>).
+                </p>
+            </form>
+
+            <section class="rewrite-tool" id="rewriteTool" hidden>
+                <h2>Quick bullet rewrite</h2>
+                <p class="form-hint">Improve a single line with the LLM (uses your API key).</p>
+                <textarea id="rewriteInput" rows="3" placeholder="e.g. Built a chatbot using Python."></textarea>
+                <button type="button" class="btn-secondary" id="rewriteBtn">Rewrite bullet</button>
+                <div id="rewriteOutput" class="rewrite-output" hidden></div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Ensure any injected footer is removed immediately and in the future
+        (function() {
+            function stripFooter() {
+                try {
+                    document.querySelectorAll('.container > footer').forEach(f => f.remove());
+                    document.querySelectorAll('p').forEach(p => {
+                        if (p.textContent && p.textContent.includes('All rights reserved')) p.remove();
+                    });
+                } catch (e) {}
+            }
+            stripFooter();
+            const obs = new MutationObserver(() => stripFooter());
+            obs.observe(document.documentElement || document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>

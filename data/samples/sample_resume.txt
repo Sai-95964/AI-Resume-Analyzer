@@ -1,0 +1,22 @@
+John Doe
+Software Engineer | john.doe@email.com | github.com/johndoe
+
+SUMMARY
+Python developer with 4 years of experience building web APIs and data pipelines.
+Comfortable with Flask, SQL, and Git. Interested in machine learning and AI applications.
+
+SKILLS
+Python, SQL, Flask, Django, Git, HTML, CSS, JavaScript, Pandas, NumPy
+
+EXPERIENCE
+Software Engineer — TechStart Inc. (2021–Present)
+- Built a chatbot using Python for customer support automation
+- Developed REST APIs with Flask serving 10k daily requests
+- Wrote SQL queries and optimized database performance
+
+Junior Developer — CodeLab (2019–2021)
+- Fixed bugs and added features to internal Django tools
+- Collaborated in agile sprints with a team of 5
+
+EDUCATION
+B.S. Computer Science, State University, 2019

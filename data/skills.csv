@@ -1,0 +1,21 @@
+skill,category,level
+Python,Programming,intermediate
+JavaScript,Programming,intermediate
+Java,Programming,beginner
+C++,Programming,intermediate
+SQL,Database,intermediate
+MongoDB,Database,beginner
+Flask,Web Framework,intermediate
+Django,Web Framework,beginner
+React,Frontend,intermediate
+HTML,Frontend,advanced
+CSS,Frontend,advanced
+Docker,DevOps,beginner
+Kubernetes,DevOps,beginner
+Git,Version Control,advanced
+AWS,Cloud,intermediate
+Machine Learning,AI/ML,intermediate
+Deep Learning,AI/ML,beginner
+TensorFlow,AI/ML,beginner
+Pandas,Data Science,intermediate
+NumPy,Data Science,intermediate

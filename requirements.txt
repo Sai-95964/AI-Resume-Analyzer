@@ -1,0 +1,18 @@
+# Python 3.10–3.12: pinned stack works well. On 3.13+, pip resolves newer wheels.
+Flask>=2.3.2,<4
+Werkzeug>=2.3.6,<4
+python-docx>=0.8.11
+PyPDF2>=3.0.1
+scikit-learn>=1.3.0
+nltk>=3.8.1
+pandas>=2.0.3
+numpy>=1.24.3
+fuzzywuzzy>=0.18.0
+python-Levenshtein>=0.21.0
+requests>=2.31.0
+gunicorn>=20.1.0
+python-dotenv>=1.0.0
+openai>=1.30.0
+google-generativeai>=0.8.0
+Jinja2>=3.1.2
+click>=8.1.3
