@@ -1,6 +1,74 @@
 # AI Resume Analyzer
 
-An intelligent resume analysis tool that evaluates resumes against job descriptions using AI and machine learning.
+AI-powered Resume Analyzer with ATS scoring, job matching, skill extraction, and Gemini-powered feedback.
+
+## Features
+
+- ATS scoring with transparent breakdown (skills, keywords, experience, education, formatting)
+- Resume-job matching and similarity scoring
+- Skill extraction and gap analysis
+- LLM-powered resume review, rewrites, and interview question suggestions (optional)
+- PDF report generation for recruiter-friendly sharing
+- Web UI built with Flask; optional Gemini/OpenAI integration
+
+## Architecture
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for a detailed architecture and component breakdown.
+
+## Screenshots
+
+![Home](screenshots/home.svg)
+![Upload](screenshots/upload.svg)
+![Results](screenshots/results.svg)
+![ATS Dashboard](screenshots/ats_dashboard.svg)
+
+## Installation
+
+1. Create and activate a Python virtual environment:
+
+```powershell
+python -m venv venv
+venv\Scripts\activate
+```
+
+2. Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+3. Run the app:
+
+```powershell
+python run.py
+```
+
+Open http://127.0.0.1:5000 in your browser.
+
+## Live Demo
+
+If you deploy this app, provide a public URL here.
+
+## Tech Stack
+
+- Python 3.10+
+- Flask
+- scikit-learn, NLTK, pandas
+- ReportLab (PDF generation)
+- Optional: Google Gemini or OpenAI for LLM features
+- Frontend: plain JS + Chart.js for dashboards
+
+## Future Improvements
+
+- Add Firebase Authentication to save and recall past analyses by users
+- Improve UI and add interactive charts and export options
+- Add job-description skill gap visualizations and downloadable PDF reports (implemented)
+- Add CI/CD, tests, and containerization for cloud deployment
+
+## Contributing
+
+Contributions welcome — open an issue or a pull request.
+
 
 ## Features
 
